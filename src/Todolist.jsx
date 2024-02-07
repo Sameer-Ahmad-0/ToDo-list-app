@@ -13,17 +13,13 @@ setInput(event.target.value);
 
 const listOfItem = ()=>{
   setItem((oldItem)=>{
-   return [...oldItem, input]
+   return [...oldItem, {id:Date.now(),value:input}]
   })
   setInput("");
  };
  const deleteItem=(id)=>{
   console.log("deleted");
-  setItem((oldItem)=>{
- return oldItem.filter((arrElement, index)=>{
-  return index !== id  ;
- })
-  })
+  setItem(item.filter((todo=>item.id==id)))
  }
 
 
@@ -39,7 +35,7 @@ const listOfItem = ()=>{
         <button className={styles} onClick= {listOfItem}><span>+</span></button>
         <ol>
            { item.map((itemVal, index)=>{
-              return  <li key={index} id={index} className={styles}><span><i  className="fa fa-times" onClick={deleteItem}></i></span>: {itemVal} </li>
+              return  <li key={itemVal.id}  className={styles}><span><i  className="fa fa-times" onClick={()=>deleteItem(itemVal.id)}></i></span>: {itemVal.value} </li>
             })}
         </ol>
         </div>
